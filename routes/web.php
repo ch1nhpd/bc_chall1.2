@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/process', [LoginController::class, 'process']);
-
+Route::get('fake',[LoginController::class, 'fakeacc']);
 
 
 Route::group(['middleware' => ['auth']], function () {
