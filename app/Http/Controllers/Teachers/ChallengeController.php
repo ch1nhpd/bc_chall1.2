@@ -72,14 +72,9 @@ class ChallengeController extends Controller
 
     public function submit(Request $request)
     {
-        $rs = $this->accountChallengeService->add($request);
-        $challenge = $this->challengeService->findOne($request);
-
-        $file_name = $challenge->linkfile . '.txt';
-        $file_url = 'storage\app\uploads\\' . $file_name;
-        $content = file_get_contents(base_path($file_url));
-
-        if ($rs) {
+        $content = $this->accountChallengeService->add($request);
+       
+        if ($content !='') {
             return redirect()->back()->with('right-answer', $content);
         } else {
             return redirect()->back()->with('wrong-answer', 'Wrong Answer');

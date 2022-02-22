@@ -27,13 +27,15 @@ class ChallengeService
                 Session::flash('error', 'Invalid File Name!');
                 return false;
             }
-            $file->storeAs('uploads', $fileName); //public/uploads
-            Challenge::create([
+            
+            $challenge = Challenge::create([
                 'description' => (string)$request->input('description'),
                 'hint' => (string)$request->input('hint'),
-                'linkfile' => (string)pathinfo($fileName, PATHINFO_FILENAME),
+                // 'linkfile' => (string)pathinfo($fileName, PATHINFO_FILENAME),
                 'account_id' => (int)Auth::user()->id,
-            ]);
+            ]); 
+            $challengeId = $challenge->id;
+            $file->storeAs('uploads/challenges', $challengeId.'_'.$fileName); //public/uploads/challenges
 
             Session::flash('success', 'Created Challenge!');
             return true;

@@ -10,8 +10,8 @@ class Challenge extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'description',
-        'linkfile',
         'hint',
         'account_id',
     ];
